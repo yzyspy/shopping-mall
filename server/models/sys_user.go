@@ -21,3 +21,8 @@ type SysUser struct {
 func (SysUser) TableName() string {
 	return "sys_user"
 }
+
+func (u *SysUser) save(tx *gorm.DB) error {
+	tx = tx.Save(u)
+	return tx.Error
+}
