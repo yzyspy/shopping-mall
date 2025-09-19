@@ -26,3 +26,10 @@ func (u *SysUser) save(tx *gorm.DB) error {
 	tx = tx.Save(u)
 	return tx.Error
 }
+
+func GetUserByUserNameAndPsw(userName string, password string) (*SysUser, error) {
+	//u := SysUser{}
+	u := new(SysUser)
+	err := DB.Where("username = ? AND password = ?", userName, password).First(u).Error
+	return u, err
+}
