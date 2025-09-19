@@ -2,33 +2,22 @@ package models
 
 import "gorm.io/gorm"
 
-type Sysuser struct {
-	gorm.Model
-	UserName string
-	PassWord
-	Phone
-	'gorm: "column:username;type:varchar(50);" json: "userNaime
-	string gorm: "column:password;type: varchar(36);" jsor:"passWord"
-	string
-	"gorm:"column:phone;type:varchar(20);" json:"phone"
-	1
-	WxUnionId string
-	WxOpenId
-	Avatar
-	Sex
-	Email
-	Remarks
-	RoleId
-	string
-	string
-	string
-	string
-	string
-	uint
-	gorm:"column: wx_union_id;type:varchar(255);"json:"wxUnionId"
-`gorm: "column:wx_open_id;type:varchar(255);"json:"wx0penId"
-gorm: "column:avatar;type:varchar(255);" json:"avatar"
-gorm: "column:sex;type:varchar(20);"json: sex"
-gorm: "column:email;type:varchar(20);" json: "email"
-gorm: "column:remarks;type:varchar(255);" json: "remarks"
-gorm: "column:role_id;type:bigint(20);" json: "roleId 
+// 增加字段注释
+type SysUser struct {
+	gorm.Model `json:"gorm_._model"`
+	UserName   string `gorm:"column:username;type:varchar(50);not null;default:''" json:"user_name" comment:"用户名"`
+	Password   string `gorm:"column:password;type:varchar(100);not null;default:''" json:"password" comment:"密码"`
+	Phone      string `gorm:"column:phone;type:varchar(20);not null;default:''" json:"phone" comment:"手机号"`
+	WxUserid   string `gorm:"column:wx_userid;type:varchar(50);not null;default:''" json:"wx_userid" comment:"微信用户ID"`
+	WxOpenid   string `gorm:"column:wx_openid;type:varchar(50);not null;default:''" json:"wx_openid" comment:"微信开放ID"`
+	Avatar     string `gorm:"column:avatar;type:varchar(255);not null;default:''" json:"avatar" comment:"头像"`
+	Sex        string `gorm:"column:sex;type:varchar(20);not null;default:''" json:"sex" comment:"性别"`
+	Email      string `gorm:"column:email;type:varchar(100);not null;default:''" json:"email" comment:"邮箱"`
+	Remarks    string `gorm:"column:remarks;type:varchar(255);not null;default:''" json:"remarks" comment:"备注"`
+	RoleId     int    `gorm:"column:role_id;type:int;not null;default:0" json:"role_id" comment:"角色ID"`
+}
+
+// 设置表名称
+func (SysUser) TableName() string {
+	return "sys_user"
+}

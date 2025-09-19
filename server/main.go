@@ -10,9 +10,4 @@ func main() {
 
 	r := router.App()
 	r.Run(":8081")
-
-	//my_shopping_mall
-	//admin
-	//root
-	//10.92.160.243
 }

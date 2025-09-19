@@ -10,7 +10,8 @@ var DB *gorm.DB
 func NewDB() {
 	dsn := "root:admin@tcp(10.92.160.243:3306)/my_shopping_mall?charset=utf8mb4&parseTime=True&loc=Local"
 	db, error := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-
+	//初始化sys_user表
+	db.AutoMigrate(&SysUser{})
 	if error != nil {
 		panic("failed to connect database")
 	}
