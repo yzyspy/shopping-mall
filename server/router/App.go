@@ -1,7 +1,14 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"shopping_mall/service"
+)
 
 func App() *gin.Engine {
-	return gin.Default()
+	r := gin.Default()
+
+	r.POST("/login/psw", service.LoginPsw)
+
+	return r
 }

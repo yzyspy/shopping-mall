@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"shopping_mall/models"
@@ -8,6 +9,7 @@ import (
 
 func LoginPsw(c *gin.Context) {
 	request := new(LoginPswRequest)
+	fmt.Println("LoginPsw request:", request)
 	if err := c.ShouldBindJSON(request); err != nil {
 		c.JSON(http.StatusOK, gin.H{
 			"code": -1,

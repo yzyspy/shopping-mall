@@ -9,5 +9,6 @@ func main() {
 	models.NewDB()
 
 	r := router.App()
+	
 	r.Run(":8081")
 }
