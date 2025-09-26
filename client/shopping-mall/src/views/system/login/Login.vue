@@ -12,18 +12,28 @@
 <script lang="ts">
 // JS 或 TS
 import {ref} from "vue";
+import service from "../../../api/request.ts";
 
 export default {
   name: 'Person', // 组件名称
   setup() {
     // 数据
-    let name = '张三' // 注意这样写name不是响应式数据
+    let name = ref('张三') // 注意这样写name不是响应式数据
     let age = ref(12) // 注意这样写age不是响应式数据
     let tel = '138888888'
 
     // 方法
     function changeName() {
-      name = '李四'
+      queryUser().then(result => {
+        const dataString = JSON.stringify(result);
+        console.log('获取到的数据:', dataString);
+        name.value = dataString;
+      }).catch(error => {
+            console.error('获取数据失败:', error);
+          });
+
+
+
     }
 
     function changeAge() {
@@ -33,6 +43,21 @@ export default {
     function showTel() {
       alert(tel)
     }
+
+    async function queryUser() {
+      try {
+        const response = await service.post('/login/psw', {
+          username: 'abc',
+          password: '111'
+        });
+        console.log('创建成功:', response.data);
+        return response.data;
+      } catch (error) {
+        console.error('创建失败:', error);
+        throw error;
+      }
+    }
+
 
     // 将数据，方法交出去，模版中才可以使用
     return {name, age, tel, changeName, changeAge, showTel}
